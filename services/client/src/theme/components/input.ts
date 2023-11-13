@@ -30,7 +30,7 @@ export const inputStyles = {
             },
         },
         baseStyle: {
-            field: { color: "red" },
+            field: { color: "red", h: "32px" },
         },
     },
 };

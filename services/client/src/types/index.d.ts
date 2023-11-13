@@ -1,36 +1,38 @@
-interface Pokemon {
-    name: string;
+declare interface IResponse {
+    statusCode: number;
+    message: string;
 }
 
-type Fighter = {
-    _id: string;
-    name: string;
-};
-
-interface IMatchResult {
-    _id: string;
-    winner: Fighter;
-    date: string;
+declare interface IServerResponse<T> extends IResponse {
+    data: T;
 }
 
-interface IRankingProfile {
-    _id: string;
-    name: string;
-    type: string;
-    class: string;
-    country: string;
-    recentFightOne: string;
-    recentFightTwo: string;
-    recentFightThree: string;
-    socialMedia: string;
-    icon?: string;
-}
-
-interface INewsItem {
-    _id: string;
-    title: string;
-    date: string;
-    description: string;
-    source: string;
-    image?: string;
+declare interface IPredictPayload {
+    light: number;
+    tKitchen: number;
+    hKitchen: number;
+    tLeaving: number;
+    hLeaving: number;
+    tLaundry: number;
+    hLaundry: number;
+    tOffice: number;
+    hOffice: number;
+    tBathroom: number;
+    hBathroom: number;
+    tOutsideBuilding: number;
+    hOutsideBuilding: number;
+    tIroning: number;
+    hIroning: number;
+    tTeenager: number;
+    hTeenager: number;
+    tParents: number;
+    hParents: number;
+    tOutside: number;
+    hOutside: number;
+    pressure: number;
+    windSpeed: number;
+    visibility: number;
+    tdewpoint: number;
+    r1: number;
+    r2: number;
 }

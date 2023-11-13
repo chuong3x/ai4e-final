@@ -1,28 +1,25 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { RabbitmqModule } from './modules/rabbitmq/rabbitmq.module';
+import { RabbitMQService } from './rabbitmq.service';
+import { RabbitMQController } from './rabbitmq.controller';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), RabbitmqModule],
-  controllers: [AppController],
+  controllers: [RabbitMQController],
   providers: [
-    AppService,
+    RabbitMQService,
     {
-      provide: 'AI4E_SERVICE',
+      provide: 'RABBITMQ_SERVICE',
       useFactory: (configService: ConfigService) => {
         const mqUri = configService.get<string>('MQ_URI');
         const mqUser = configService.get<string>('MQ_USER');
         const mqPwd = configService.get<string>('MQ_PWD');
-        const inputQueue = configService.get<string>('MQ_INPUT_QUEUE_NAME');
         return ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
             urls: [`amqp://${mqUser}:${mqPwd}@${mqUri}`],
-            queue: inputQueue,
+            queue: 'input-queue-name',
             queueOptions: {
               durable: false,
             },
@@ -32,5 +29,6 @@ import { RabbitmqModule } from './modules/rabbitmq/rabbitmq.module';
       inject: [ConfigService],
     },
   ],
+  exports: [RabbitMQService],
 })
-export class AppModule {}
+export class RabbitmqModule {}
