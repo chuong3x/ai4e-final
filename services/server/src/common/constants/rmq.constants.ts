@@ -1,2 +1,0 @@
-export const INPUT_QUEUE_NAME = 'INPUT_QUEUE_NAME';
-export const OUTPUT_QUEUE_NAME = 'OUTPUT_QUEUE_NAME';
