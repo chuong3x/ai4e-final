@@ -14,16 +14,13 @@ model = keras.models.load_model('./my_model.h5')
 def predict():
     try:
         data = request.get_json()  # Nhận dữ liệu từ client
-        print(data)
         # Chuyển đổi dữ liệu thành định dạng mà mô hình yêu cầu
         features = np.array(data['features']).reshape(1, -1)
-        print(features)
         # Dự đoán kết quả
         prediction = model.predict(features)
-        print(prediction)
 
         # Trả về kết quả dự đoán dưới dạng JSON
-        return jsonify({'prediction': prediction[0].tolist()})
+        return jsonify({'message': 'Success','data': prediction[0].tolist()})
     except Exception as e:
         return jsonify({'error': str(e)})
 
