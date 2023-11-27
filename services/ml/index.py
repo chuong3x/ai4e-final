@@ -10,7 +10,7 @@ CORS(app)  # Cấu hình CORS cho tất cả các route
 model = keras.models.load_model('./my_model.h5')
 ###
 
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def predict():
     try:
         data = request.get_json()  # Nhận dữ liệu từ client
